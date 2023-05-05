@@ -1,0 +1,29 @@
+# https://developer.axoniq.io/w/running-axon-server-in-docker-continuing-from-local-developer-install-to-containerized
+# Volume은 적절하게 수정하기
+version: "3.8"
+
+services:
+  axonserver:
+    image: axoniq/axonserver
+    container_name: axon-core
+    volumes:
+      - ./axonserver-data:/data
+      - ./axonserver-events:/eventdata
+      - ./axonserver-config:/config:ro
+    ports:
+      - '8024:8024'
+      - '8124:8124'
+      - '8224:8224'
+    restart: unless-stopped
+  mysql:
+    image: mysql:8
+    container_name: axon-mysql
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: axon
