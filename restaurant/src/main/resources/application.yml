@@ -1,19 +1,22 @@
+server:
+  port: 8082
+
 axon:
   serializer:
     general: xstream
   axonserver:
     servers: localhost:8124
-    component-name: core
+    component-name: restaurant
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3307/axon
+    url: jdbc:mysql://localhost:3308/axon
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
