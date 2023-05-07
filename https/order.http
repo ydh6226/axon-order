@@ -1,0 +1,9 @@
+###
+POST http://localhost:8081/api/v1/orders
+Content-Type: application/json
+
+{
+  "itemName": "모자20",
+  "quantity": 12,
+  "price": 5000
+}
