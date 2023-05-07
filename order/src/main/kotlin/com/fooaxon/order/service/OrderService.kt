@@ -1,5 +1,6 @@
 package com.fooaxon.order.service
 
+import com.fooaxon.order.controller.dto.ChangeOrderItemInfoRequest
 import com.fooaxon.order.controller.dto.CreateOrderRequest
 import mu.KotlinLogging
 import org.axonframework.commandhandling.gateway.CommandGateway
@@ -22,5 +23,12 @@ class OrderService(
 
         logger.info { "주문 생성 커맨드 발행" }
         return commandGateway.sendAndWait(command, 1, TimeUnit.SECONDS)
+    }
+
+    fun changeItemInfo(orderId: String, request: ChangeOrderItemInfoRequest) {
+        logger.info { "주문상품정보 변경 요청${orderId}" }
+
+        logger.info { "주문상품정보 커맨드 발행: ${orderId}" }
+        commandGateway.sendAndWait<String>(request.toCommand(orderId))
     }
 }

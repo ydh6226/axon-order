@@ -17,7 +17,6 @@ allOpen {
 }
 
 noArg {
-//    invokeInitializers = true
     annotation("org.axonframework.spring.stereotype.Aggregate")
 }
 

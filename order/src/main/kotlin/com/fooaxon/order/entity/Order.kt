@@ -12,8 +12,8 @@ class Order(
     @Enumerated(EnumType.STRING)
     var status: OrderStatus = OrderStatus.CREATED,
     val itemName: String,
-    val quantity: Int,
-    val price: BigDecimal,
+    var quantity: Int,
+    var price: BigDecimal,
 
     ) {
     @Id

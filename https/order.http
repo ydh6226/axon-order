@@ -3,7 +3,16 @@ POST http://localhost:8081/api/v1/orders
 Content-Type: application/json
 
 {
-  "itemName": "모자20",
+  "itemName": "노트북3",
   "quantity": 12,
   "price": 5000
+}
+
+###
+PATCH http://localhost:8081/api/v1/orders/9678199f-1a1b-490b-85e7-c3ab9010f4ec
+Content-Type: application/json
+
+{
+  "quantity": 0,
+  "price": 800
 }
