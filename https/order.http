@@ -3,16 +3,16 @@ POST http://localhost:8081/api/v1/orders
 Content-Type: application/json
 
 {
-  "itemName": "노트북3",
-  "quantity": 12,
-  "price": 5000
+  "itemName": "책상책상철수책상",
+  "quantity": 1,
+  "price": 100
 }
 
 ###
-PATCH http://localhost:8081/api/v1/orders/9678199f-1a1b-490b-85e7-c3ab9010f4ec
+PATCH http://localhost:8081/api/v1/orders/58f2aded-046c-4a6e-9624-d13b51a9b411
 Content-Type: application/json
 
 {
-  "quantity": 0,
-  "price": 800
+  "quantity": 6,
+  "price": 600
 }

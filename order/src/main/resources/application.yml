@@ -3,7 +3,8 @@ server:
 
 axon:
   serializer:
-    general: xstream
+    # https://docs.axoniq.io/reference-guide/axon-framework/serialization#preventing-duplicate-serialization
+    general: jackson # default는 xml이다, java 17에서 xstream 버그있어서 jakcson 사용하라고함.
   axonserver:
     servers: localhost:8124
     component-name: order

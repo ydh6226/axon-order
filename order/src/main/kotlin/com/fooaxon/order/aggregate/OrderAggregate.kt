@@ -14,7 +14,8 @@ import org.axonframework.spring.stereotype.Aggregate
 import java.math.BigDecimal
 
 // protoType scope인 @Component
-@Aggregate
+// https://stackoverflow.com/questions/68384804/axon-framework-snapshotevents-not-getting-populated-after-exceeding-threshold-on
+@Aggregate(repository = "orderAggregateRepository") // 기본으로 찾는 룰이 있긴한데, 우선 명시적으로 지정함.
 class OrderAggregate {
     @AggregateIdentifier
     lateinit var orderId: String
