@@ -16,3 +16,7 @@ Content-Type: application/json
   "quantity": 6,
   "price": 600
 }
+
+
+###
+POST http://localhost:8081/api/v1/orders/projections/reset

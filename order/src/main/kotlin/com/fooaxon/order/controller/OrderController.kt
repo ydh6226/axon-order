@@ -3,6 +3,7 @@ package com.fooaxon.order.controller
 import com.fooaxon.order.controller.dto.ChangeOrderItemInfoRequest
 import com.fooaxon.order.controller.dto.CreateOrderRequest
 import com.fooaxon.order.controller.dto.CreateOrderResponse
+import com.fooaxon.order.service.OrderQueryService
 import com.fooaxon.order.service.OrderService
 import org.springframework.web.bind.annotation.*
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/v1/orders")
 class OrderController(
     private val orderService: OrderService,
+    private val orderQueryService: OrderQueryService,
 ) {
 
     @PostMapping
@@ -27,5 +29,11 @@ class OrderController(
         return true
     }
 
+    @PostMapping("/projections/reset")
+    fun deleteAll() {
+        // https://cla9.tistory.com/17 리플레이 최적화
+        // TODO: 단건으로만 리플레이 가능한가?
+        orderQueryService.reset()
+    }
 
 }
