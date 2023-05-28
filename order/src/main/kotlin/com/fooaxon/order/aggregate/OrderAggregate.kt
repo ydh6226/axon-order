@@ -2,9 +2,11 @@ package com.fooaxon.order.aggregate
 
 import com.fooaxon.order.command.ChangeOrderItemInfoCommand
 import com.fooaxon.order.command.CreateOrderCommand
+import com.fooaxon.order.command.PrepareShippingCommand
 import com.fooaxon.order.entity.OrderStatus
 import com.fooaxon.order.event.OrderCreatedEvent
 import com.fooaxon.order.event.OrderItemInfoChangedEvent
+import com.fooaxon.order.event.OrderShippingPreparedEvent
 import mu.KotlinLogging
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
@@ -51,6 +53,17 @@ class OrderAggregate {
         this.itemName = event.itemName
         this.price = event.price
         this.quantity = event.quantity
+    }
+
+    @CommandHandler
+    fun on(command: PrepareShippingCommand) {
+        logger.info { "배송상태로변경: ${command}" }
+        AggregateLifecycle.apply(OrderShippingPreparedEvent(orderId, OrderStatus.SHIPPING_PREPARED))
+    }
+
+    @EventSourcingHandler
+    fun on(event: OrderShippingPreparedEvent) {
+        status = event.orderStatus
     }
 
     // 이벤트를 replay하기 위해 명시적으로 호출 가능한 기본생성자가 있어야함.

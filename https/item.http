@@ -3,6 +3,6 @@ POST http://localhost:8082/
 Content-Type: application/json
 
 {
-  "itemName": "신형맥북22",
-  "stockQuantity": -1
+  "itemName": "신형맥북33",
+  "stockQuantity": 100
 }

@@ -9,6 +9,7 @@ data class CreateOrderCommand(
     @TargetAggregateIdentifier
     val orderId: String,
     val itemName: String,
+    val itemId: String,
     val quantity: Int,
     val price: BigDecimal,
 ) {
@@ -22,6 +23,7 @@ data class CreateOrderCommand(
             itemName = itemName,
             quantity = quantity,
             price = price,
+            itemId = itemId,
         )
     }
 

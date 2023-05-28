@@ -21,7 +21,7 @@ class ItemService(
     ): String {
 
         val itemId = UUID.randomUUID().toString()
-        val command = CreateItemCommand(itemId, itemId, stockQuantity)
+        val command = CreateItemCommand(itemId, itemName, stockQuantity)
         return try {
             commandGateway.sendAndWait(command, 1, TimeUnit.SECONDS)
         } catch (e: Exception) {

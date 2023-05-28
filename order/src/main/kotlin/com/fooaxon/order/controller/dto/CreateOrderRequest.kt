@@ -7,6 +7,7 @@ data class CreateOrderRequest(
     val itemName: String,
     val quantity: Int,
     val price: BigDecimal,
+    val itemId: String,
 ) {
 
     fun toCommand(orderId: String): CreateOrderCommand {
@@ -15,6 +16,7 @@ data class CreateOrderRequest(
             itemName = itemName,
             quantity = quantity,
             price = price,
+            itemId = itemId,
         )
     }
 }

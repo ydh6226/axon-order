@@ -6,8 +6,9 @@ POST http://localhost:8081/api/v1/orders
 Content-Type: application/json
 
 {
-  "itemName": "책상책상철수책상",
-  "quantity": 1,
+  "itemName": "2222",
+  "itemId": "37a233b3-b7b0-470f-ba14-551bee052a52",
+  "quantity": 100,
   "price": 100
 }
 

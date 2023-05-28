@@ -4,4 +4,5 @@ include(
     "order",
     "restaurant",
     "launcher",
+    "common",
 )

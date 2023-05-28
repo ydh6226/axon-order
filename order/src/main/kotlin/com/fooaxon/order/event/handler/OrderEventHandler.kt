@@ -4,6 +4,7 @@ import com.fooaxon.order.dto.OrderQuery
 import com.fooaxon.order.entity.Order
 import com.fooaxon.order.event.OrderCreatedEvent
 import com.fooaxon.order.event.OrderItemInfoChangedEvent
+import com.fooaxon.order.event.OrderShippingPreparedEvent
 import com.fooaxon.order.repository.OrderRepository
 import mu.KotlinLogging
 import org.axonframework.config.ProcessingGroup
@@ -52,6 +53,17 @@ class OrderEventHandler(
 
         order.quantity = event.quantity
         order.price = event.price
+    }
+
+    @EventHandler
+    @AllowReplay
+    @Transactional
+    fun on(event: OrderShippingPreparedEvent) {
+        logger.info { "[order projection :: OrderShippingPreparedEvent] 주문배송준비 완료: ${event}" }
+
+        val order = getOrderById(event.orderId)
+
+        order.status = event.orderStatus
     }
 
     @QueryHandler
