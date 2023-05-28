@@ -1,0 +1,8 @@
+###
+POST http://localhost:8082/
+Content-Type: application/json
+
+{
+  "itemName": "신형맥북22",
+  "stockQuantity": -1
+}
