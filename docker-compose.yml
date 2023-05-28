@@ -39,3 +39,15 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: axon
+  mysql-launcher:
+    image: mysql:8
+    container_name: axon-mysql-launcher
+    volumes:
+      - ./mysql-launcher-data:/var/lib/mysql
+    ports:
+      - "3309:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: axon

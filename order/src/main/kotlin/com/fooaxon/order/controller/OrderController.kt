@@ -3,6 +3,7 @@ package com.fooaxon.order.controller
 import com.fooaxon.order.controller.dto.ChangeOrderItemInfoRequest
 import com.fooaxon.order.controller.dto.CreateOrderRequest
 import com.fooaxon.order.controller.dto.CreateOrderResponse
+import com.fooaxon.order.entity.Order
 import com.fooaxon.order.service.OrderQueryService
 import com.fooaxon.order.service.OrderService
 import org.springframework.web.bind.annotation.*
@@ -13,6 +14,11 @@ class OrderController(
     private val orderService: OrderService,
     private val orderQueryService: OrderQueryService,
 ) {
+
+    @GetMapping("/{orderId}")
+    fun find(@PathVariable orderId: String): Order {
+        return orderQueryService.findOrder(orderId)
+    }
 
     @PostMapping
     fun create(@RequestBody request: CreateOrderRequest): CreateOrderResponse {

@@ -1,5 +1,6 @@
 package com.fooaxon.order.event.handler
 
+import com.fooaxon.order.dto.OrderQuery
 import com.fooaxon.order.entity.Order
 import com.fooaxon.order.event.OrderCreatedEvent
 import com.fooaxon.order.event.OrderItemInfoChangedEvent
@@ -9,6 +10,7 @@ import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.AllowReplay
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.eventhandling.ResetHandler
+import org.axonframework.queryhandling.QueryHandler
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
@@ -46,10 +48,16 @@ class OrderEventHandler(
     fun on(event: OrderItemInfoChangedEvent) {
         logger.info { "[order projection :: OrderItemInfoChangedEvent] 주문상품 정보 변경: ${event}" }
 
-        val order = getOrderById(event)
+        val order = getOrderById(event.orderId)
 
         order.quantity = event.quantity
         order.price = event.price
+    }
+
+    @QueryHandler
+    fun on(query: OrderQuery): Order {
+        logger.info { "[order projection:: OrderQuery] 주문조회: ${query}" }
+        return getOrderById(query.orderId)
     }
 
     @ResetHandler
@@ -58,6 +66,8 @@ class OrderEventHandler(
         orderRepository.deleteAll()
     }
 
-    private fun getOrderById(event: OrderItemInfoChangedEvent) = (orderRepository.findByOrderId(event.orderId)
-        ?: throw IllegalArgumentException("${event.orderId} 주문을 찾을 수 없습니다."))
+    private fun getOrderById(orderId: String): Order {
+        return (orderRepository.findByOrderId(orderId)
+            ?: throw IllegalArgumentException("$orderId 주문을 찾을 수 없습니다."))
+    }
 }
